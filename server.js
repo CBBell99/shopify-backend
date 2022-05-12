@@ -17,14 +17,10 @@ app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
-app.get('/', (req, res) =>
-  res.send("hello")
-)
+// Routes
+const usersRoutes = require('./routes/users')
 
-app.get('/products', (req, res) => {
-  db.query(`SELECT * FROM products`)
-    .then((data) => res.json(data.rows))
-});
+app.use("/api/users/", usersRoutes(db))
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
