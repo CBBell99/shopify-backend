@@ -7,7 +7,7 @@ module.exports = (db) => {
     console.log(query);
     db.query(query)
       .then((data) => {
-        const products = data.rows;
+        const products = data.rows[0];
         res.json({ products });
       })
       .catch((error) => {

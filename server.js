@@ -20,9 +20,11 @@ app.use(express.json({ extended: true }));
 // Routes
 const usersRoutes = require("./routes/users");
 const productsRoutes = require("./routes/products");
+const shipmentsRoutes = require("./routes/shipments");
 
 app.use("/api/users/", usersRoutes(db));
 app.use("/api/products/", productsRoutes(db));
+app.use("/api/shipments/", shipmentsRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
