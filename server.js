@@ -1,27 +1,29 @@
 // load .env data into process.env
-require('dotenv').config();
+require("dotenv").config();
 
 // Web server config
 const PORT = process.env.PORT || 3000;
 const express = require("express");
 const app = express();
-const morgan = require("morgan")
+const morgan = require("morgan");
 
 // database
-const { Pool } = require('pg');
-const dbParams = require("./lib/db")
-const db = new Pool(dbParams)
+const { Pool } = require("pg");
+const dbParams = require("./lib/db");
+const db = new Pool(dbParams);
 db.connect();
 
-app.use(morgan("dev"))
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
 // Routes
-const usersRoutes = require('./routes/users')
+const usersRoutes = require("./routes/users");
+const productsRoutes = require("./routes/products");
 
-app.use("/api/users/", usersRoutes(db))
+app.use("/api/users/", usersRoutes(db));
+app.use("/api/products/", productsRoutes(db));
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
-})
+  console.log(`Server listening on port ${PORT}`);
+});
