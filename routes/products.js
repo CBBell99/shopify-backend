@@ -16,11 +16,11 @@ module.exports = (db) => {
         });
     })
     .post("/", (req, res) => {
-      console.log(req.body);
-      let query = `
-      INSERT INTO products(product_name, quantity)
-    VALUES ($1, $2) RETURNING *;`;
-      db.query(query, [req.body]);
+      console.log("here", req.body);
+
+      //   INSERT INTO products(product_name, quantity)
+      // VALUES ($1, $2) RETURNING *;`;
+      // db.query(query, [req.body.text, req.body.]);
     });
   return router;
 };
