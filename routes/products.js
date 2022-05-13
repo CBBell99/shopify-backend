@@ -17,10 +17,14 @@ module.exports = (db) => {
     })
     .post("/", (req, res) => {
       console.log("here", req.body);
-
-      //   INSERT INTO products(product_name, quantity)
-      // VALUES ($1, $2) RETURNING *;`;
-      // db.query(query, [req.body.text, req.body.]);
+      const query = `INSERT INTO products(product_name, quantity)
+      VALUES ($1, $2) RETURNING *`;
+      db.query(query, [req.body.product_name, req.body.quantity]).then(
+        (data) => {
+          const products = data.rows;
+          res.json({ products });
+        }
+      );
     });
   return router;
 };
