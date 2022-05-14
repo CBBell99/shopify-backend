@@ -9,7 +9,7 @@ module.exports = (db) => {
         .then((data) => {
           console.log(data.rows);
           const products = data.rows;
-          res.json({ products });
+          res.json({ ...products });
         })
         .catch((error) => {
           res.status(500).json({ error: error.message });
@@ -21,7 +21,7 @@ module.exports = (db) => {
       VALUES ($1, $2) RETURNING *`;
       db.query(query, [req.body.product_name, req.body.quantity]).then(
         (data) => {
-          const products = data.rows;
+          const products = data.rows[0];
           res.json({ products });
         }
       );

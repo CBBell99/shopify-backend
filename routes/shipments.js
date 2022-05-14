@@ -8,7 +8,7 @@ module.exports = (db) => {
         .then((data) => {
           console.log(data.rows);
           const shipments = data.rows;
-          res.json({ shipments });
+          res.json({ ...shipments });
         })
         .catch((err) => {
           res.status(500).json({ error: err.message });
@@ -20,7 +20,7 @@ module.exports = (db) => {
         VALUES ($1, $2) RETURNING *`,
         [req.body.user_id, req.body.product_id]
       ).then((data) => {
-        const shipments = data.rows;
+        const shipments = data.rows[0];
         res.json({ shipments });
       });
     });
